@@ -5,17 +5,20 @@ $(function() {
 	var $noResults = $("<div />").attr('id','note').html('No results found.');
 	var $notes = "<p><span class='date'>{date}</span><span class='notes'>{notes}</span></p>";
 
+	console.log(localStorage["salesRep"])
 	$.ajax({
 		type:'POST',
-		url: './php/loadinfo.php',
+		url: './php/filters.php',
 		data: {
 			salesRep: localStorage["salesRep"],
 			status: "none"
 		}
 	}).done( function(data) {
+		console.log(data);
 		$("#salesName").html(localStorage["salesRep"]);
 		$("#statusSpan").html(status);
 		console.log(status, localStorage["salesRep"]);
+
 		fillData(data);
 	}); 
 
@@ -28,7 +31,7 @@ $(function() {
 		}else {
 			status = $("#status").val();
 		}
-		console.log(status);
+		console.log("salesname click: status " + status);
 		$.ajax({
 			type:'POST',
 			url: './php/loadinfo.php',
@@ -37,6 +40,7 @@ $(function() {
 				status: status
 			}
 		}).done( function(data) {
+			console.log(data);
 			fillData(data);
 		}); 
 		$(this).addClass('active');

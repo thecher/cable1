@@ -10,10 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$query = "SELECT * from clients";
 	}else if ($salesRep != "all" && $status != "none") {
 		$query = "SELECT * from clients where status like '$status' and rep like '$salesRep'";
-	}else if ($salesRep == "all" && clients != "none"{
+	}else if ($salesRep == "all" && clients != "none") {
 		$query = "SELECT * from clients where status like '$status'";
-	}else if ($salesRep != "all" && status == "none") {
-		$query = "SELECT * from clients where rep like '$salesRep'"
+	}else if ($salesRep != "all" && $status == "none") {
+		$query = "SELECT * from clients where rep like '$salesRep'";
 	}
 	
 	$result = mysql_query($query) or die(mysql_error());

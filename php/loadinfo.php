@@ -2,14 +2,14 @@
 
 include "dbconnect.php";
 
+print "got to file";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$salesRep = $_POST["salesRep"];
 	$status = $_POST["status"];
 
 	if ($salesRep != "all" && $status == "none") {
 		$query = "SELECT * from clients where rep like '$salesRep'";
-	}else if ($salesRep != "all" && $status != "none") {
-		$query = "SELECT * from clients where rep like '$salesRep' and status like '$status'";
 	}else {
 		$query = "SELECT * from clients";
 	}
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$resultArray = array();
 
 	while ($row = mysql_fetch_array($result)) {
-		$num_rows = mysql_num_rows($result);
+		//$num_rows = mysql_num_rows($result);
 		//$notes = array();
 		//$notesQuery = "SELECT * from notes where acct like '$row["acct"]'";
 		$array = array(
@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		    "system"   		 => $row["system"],
 		    "address"   	 => $row["address"],
 		    "contactName"    => $row["contact_firstname"] . " " . $row["contact_lastname"],
-		    "phone"    		 => $row["phone"],
-		    "notes" 		 => $notes;
+		    "phone"    		 => $row["phone"]
+		    //"notes" 		 => $notes
 		);
 		//echo($array.zone);
 		array_push($resultArray, $array);
